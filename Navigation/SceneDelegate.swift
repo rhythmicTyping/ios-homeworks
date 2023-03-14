@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
-        // Создаю экземпляры классов viewController для дальнейшего использования в коде
+        // Создаю экземпляры классов viewController для дальнейшего использования в коде.
 
         let profileViewController = ProfileViewController()
         profileViewController.title = "Profile"
@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         let feedNavigationViewController = UINavigationController(rootViewController: feedViewController)
         
-        // Создаю таб-бар контроллер
+        // Создаю таб-бар контроллер.
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [feedNavigationViewController, profileNavigationController]

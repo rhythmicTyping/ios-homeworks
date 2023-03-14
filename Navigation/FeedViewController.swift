@@ -17,7 +17,6 @@ class FeedViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false //  Обязательное свойство для верстки кодом (false)
         return button
     }()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +24,6 @@ class FeedViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(button)
         setupConstraints()
-
-        
         button.addTarget(self, action: #selector(buttonDidPressed), for: .touchUpInside)
 
     }
