@@ -31,31 +31,9 @@ class PostViewController: UIViewController {
 
 @objc func goToInfo() {
         let infoViewController = InfoViewController()
-    
     infoViewController.modalTransitionStyle = .coverVertical
     infoViewController.modalPresentationStyle = .pageSheet
-    
     present(infoViewController, animated: true)
     }
     
 }
-
-
-
-
-//    @objc func buttonDidPressed() {
-//        let post = Post(title: "New post")
-//        let postViewController = PostViewController(post: post)
-//        self.navigationController?.pushViewController(postViewController, animated: true)
-//    }
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
-
-

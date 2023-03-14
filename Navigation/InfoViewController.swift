@@ -25,7 +25,6 @@ class InfoViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false //  Обязательное свойство для верстки кодом (false)
         return button
     }()
-    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             alertButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
@@ -33,8 +32,6 @@ class InfoViewController: UIViewController {
         ])
     }
 }
-
-
 extension InfoViewController {
     @objc func showAllert() {
         let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
