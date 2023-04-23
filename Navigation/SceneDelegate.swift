@@ -20,19 +20,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
+        // Покраска статус бара в белый цвет (без этой настройки статус бар был серым) 
+        
+        let customNavBarAppearance = UINavigationBarAppearance()
+        customNavBarAppearance.configureWithOpaqueBackground()
+        customNavBarAppearance.backgroundColor = .white
+        
+        let appearance = UINavigationBar.appearance()
+        appearance.scrollEdgeAppearance = customNavBarAppearance
+        appearance.compactAppearance = customNavBarAppearance
+        appearance.standardAppearance = customNavBarAppearance
+        
         // Создаю экземпляры классов viewController для дальнейшего использования в коде
 
         let profileViewController = ProfileViewController()
-        profileViewController.title = "Profile"
         profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 0)
         
         let feedViewController = FeedViewController()
-        feedViewController.title = "Feed"
         feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "newspaper.fill"), tag: 1)
-        
+       
         //Создаю экземпляры навигационных контроллеров и передаю рутовое значения (первый экран) для того, чтобы использовать их в тапбаре.
         
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        
         let feedNavigationViewController = UINavigationController(rootViewController: feedViewController)
         
         // Создаю таб-бар контроллер
