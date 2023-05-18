@@ -9,6 +9,9 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+    
+// MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
