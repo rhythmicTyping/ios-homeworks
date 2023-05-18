@@ -49,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [feedNavigationViewController, profileNavigationController]
-        UITabBar.appearance().backgroundColor = .systemGray
+        UITabBar.appearance().backgroundColor = .white
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         

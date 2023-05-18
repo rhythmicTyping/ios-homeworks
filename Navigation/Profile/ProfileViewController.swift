@@ -8,31 +8,28 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
-        self.view.backgroundColor = .lightGray
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .lightGray
+        view.addSubview(profileHeaderView)
+        setupLayout()
     }
     
-    let profileHeaderView = ProfileHeaderView()
+    let profileHeaderView: ProfileHeaderView = {
+        let profileHeaderView = ProfileHeaderView()
+        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        return profileHeaderView
+    }()
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.view.addSubview(profileHeaderView)
-        profileHeaderView.frame = view.safeAreaLayoutGuide.layoutFrame
+    private func setupLayout() {
+        let safeAreaGuide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            profileHeaderView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 0.0),
+            profileHeaderView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: 0.0),
+            profileHeaderView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 0.0),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
+        ])
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
