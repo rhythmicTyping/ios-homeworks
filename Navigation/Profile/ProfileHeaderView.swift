@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
+// MARK: Subviews
+    
     let avatarImageView: UIImageView = {
         let image = UIImage(named: "Billy")
         let profilePhoto = UIImageView(image: image)
@@ -47,8 +49,9 @@ class ProfileHeaderView: UIView {
         variableStatus.textAlignment = .center
         variableStatus.attributedPlaceholder = NSAttributedString(string: "Tell me about ♂ gym ♂ ", attributes: [
             .foregroundColor: UIColor.black,
-            .font: UIFont.systemFont(ofSize: 15)
-        ])
+            .font: UIFont.systemFont(ofSize: 15),
+            ])
+        variableStatus.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         
         return variableStatus
     }()
@@ -65,31 +68,24 @@ class ProfileHeaderView: UIView {
         showStatusButton.layer.shadowOpacity = 0.7
         showStatusButton.layer.shadowRadius = 4.0
         showStatusButton.layer.masksToBounds = false
+        showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return showStatusButton
-    }()
-    
-    let newButton: UIButton = {
-        let newButton = UIButton()
-        newButton.translatesAutoresizingMaskIntoConstraints = false
-        newButton.backgroundColor = .systemBlue
-        newButton.setTitle("New button", for: .normal)
-        newButton.layer.cornerRadius = 4
-        return newButton
     }()
     
     private var statusText: String = ""
     
+    // MARK: Init
+    
     init() {
         super.init(frame: .zero)
         setupLayout()
-        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Actions
     
     @objc func buttonPressed() {
         statusLabel.text = statusText
@@ -109,7 +105,6 @@ class ProfileHeaderView: UIView {
         addSubview(statusLabel)
         addSubview(setStatusButton)
         addSubview(statusTextField)
-        addSubview(newButton)
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16.0),
@@ -131,11 +126,8 @@ class ProfileHeaderView: UIView {
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10.0),
             statusTextField.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 20.0),
             statusTextField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16.0),
-            statusTextField.heightAnchor.constraint(equalToConstant: 25.0),
+            statusTextField.heightAnchor.constraint(equalToConstant: 25.0)
             
-            newButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0.0),
-            newButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0.0),
-            newButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 333)
         ])
     }
     

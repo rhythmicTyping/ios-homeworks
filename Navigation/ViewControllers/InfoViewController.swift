@@ -10,6 +10,18 @@ import UIKit
 class InfoViewController: UIViewController {
     
     
+// MARK: Subviews
+    
+    private lazy var alertButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Alert Button", for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 9
+        button.translatesAutoresizingMaskIntoConstraints = false //  Обязательное свойство для верстки кодом (false)
+        return button
+    }()
+    
+    
 // MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -20,14 +32,8 @@ class InfoViewController: UIViewController {
         alertButton.addTarget(self, action: #selector(showAllert), for: .touchUpInside)
     }
     
-    private lazy var alertButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Alert Button", for: .normal)
-        button.backgroundColor = .black
-        button.layer.cornerRadius = 9
-        button.translatesAutoresizingMaskIntoConstraints = false //  Обязательное свойство для верстки кодом (false)
-        return button
-    }()
+ // MARK: Actions
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             alertButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),

@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    // MARK: SubViews
+    // MARK: Subviews
     
     private lazy var postButton: UIButton = {
         let button = UIButton()
