@@ -47,10 +47,13 @@ class ProfileHeaderView: UIView {
         variableStatus.layer.borderColor = UIColor.black.cgColor
         variableStatus.layer.cornerRadius = 12
         variableStatus.textAlignment = .center
-        variableStatus.attributedPlaceholder = NSAttributedString(string: "Tell me about ♂ gym ♂ ", attributes: [
-            .foregroundColor: UIColor.black,
-            .font: UIFont.systemFont(ofSize: 15),
-            ])
+        variableStatus.placeholder = "Tell me about ♂ gym ♂"
+        variableStatus.font = UIFont.systemFont(ofSize: 15)
+        variableStatus.textColor = UIColor.black
+        variableStatus.keyboardType = UIKeyboardType.default
+        variableStatus.returnKeyType = UIReturnKeyType.done
+        variableStatus.clearButtonMode = UITextField.ViewMode.whileEditing
+        
         variableStatus.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         
         return variableStatus
