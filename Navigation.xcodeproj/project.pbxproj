@@ -93,6 +93,7 @@
 		2A5F18B729BD11960042449A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				2AE403832A16387300957179 /* ViewControllers */,
 				2A4FE24629F5A57F00542C3D /* CustomViews */,
 				2A4FE24129F56E1F00542C3D /* Profile */,
 				2A4FE23E29F56C9700542C3D /* Models */,
@@ -102,11 +103,18 @@
 				2A5F18C129BD119B0042449A /* Assets.xcassets */,
 				2A5F18C329BD119B0042449A /* LaunchScreen.storyboard */,
 				2A5F18C629BD119B0042449A /* Info.plist */,
-				2A5F18CE29BE37F30042449A /* FeedViewController.swift */,
-				2A5F18D029BE3CC00042449A /* PostViewController.swift */,
-				2A5F18D429BFB8950042449A /* InfoViewController.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		2AE403832A16387300957179 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2A5F18D429BFB8950042449A /* InfoViewController.swift */,
+				2A5F18D029BE3CC00042449A /* PostViewController.swift */,
+				2A5F18CE29BE37F30042449A /* FeedViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
