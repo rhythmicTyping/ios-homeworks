@@ -9,32 +9,32 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-// MARK: Subviews
+    // MARK: Subviews
     
     let avatarImageView: UIImageView = {
         let image = UIImage(named: "Billy")
         let profilePhoto = UIImageView(image: image)
         profilePhoto.translatesAutoresizingMaskIntoConstraints = false
-        profilePhoto.backgroundColor = .black
+        profilePhoto.backgroundColor    = .black
         profilePhoto.layer.cornerRadius = 50
-        profilePhoto.layer.borderWidth = 3
-        profilePhoto.layer.borderColor = UIColor.white.cgColor
-        profilePhoto.clipsToBounds = true
+        profilePhoto.layer.borderWidth  = 3
+        profilePhoto.layer.borderColor  = UIColor.white.cgColor
+        profilePhoto.clipsToBounds      = true
         return profilePhoto
     }()
     
     let fullNameLabel: UILabel = {
-        let profileName = UILabel()
+        let profileName     = UILabel()
         profileName.translatesAutoresizingMaskIntoConstraints = false
-        profileName.text = "Billy Herrington"
-        profileName.font = UIFont.boldSystemFont(ofSize: 18)
+        profileName.text    = "Billy Herrington"
+        profileName.font    = UIFont.boldSystemFont(ofSize: 18)
         return profileName
     }()
     
     var statusLabel: UILabel = {
-        var profileStatus = UILabel()
+        var profileStatus   = UILabel()
         profileStatus.translatesAutoresizingMaskIntoConstraints = false
-        profileStatus.text = "Waiting for the ♂ gym ♂..."
+        profileStatus.text  = "Waiting for the ♂ gym ♂..."
         profileStatus.textColor = UIColor.gray
         return profileStatus
     }()
@@ -42,17 +42,17 @@ class ProfileHeaderView: UIView {
     let statusTextField: UITextField = {
         let variableStatus = UITextField()
         variableStatus.translatesAutoresizingMaskIntoConstraints = false
-        variableStatus.backgroundColor = .white
-        variableStatus.layer.borderWidth = 1
-        variableStatus.layer.borderColor = UIColor.black.cgColor
-        variableStatus.layer.cornerRadius = 12
-        variableStatus.textAlignment = .center
-        variableStatus.placeholder = "Tell me about ♂ gym ♂"
-        variableStatus.font = UIFont.systemFont(ofSize: 15)
-        variableStatus.textColor = UIColor.black
-        variableStatus.keyboardType = UIKeyboardType.default
-        variableStatus.returnKeyType = UIReturnKeyType.done
-        variableStatus.clearButtonMode = UITextField.ViewMode.whileEditing
+        variableStatus.backgroundColor      = .white
+        variableStatus.layer.borderWidth    = 1
+        variableStatus.layer.borderColor    = UIColor.black.cgColor
+        variableStatus.layer.cornerRadius   = 12
+        variableStatus.textAlignment        = .center
+        variableStatus.placeholder          = "Tell me about ♂ gym ♂"
+        variableStatus.font                 = UIFont.systemFont(ofSize: 15)
+        variableStatus.textColor            = UIColor.black
+        variableStatus.keyboardType         = UIKeyboardType.default
+        variableStatus.returnKeyType        = UIReturnKeyType.done
+        variableStatus.clearButtonMode      = UITextField.ViewMode.whileEditing
         
         variableStatus.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         
@@ -62,15 +62,16 @@ class ProfileHeaderView: UIView {
     let setStatusButton: UIButton = {
         let showStatusButton = UIButton()
         showStatusButton.translatesAutoresizingMaskIntoConstraints = false
-        showStatusButton.backgroundColor = .systemBlue
+        showStatusButton.backgroundColor        = .systemBlue
         showStatusButton.setTitle("Set status", for: .normal)
-        showStatusButton.layer.cornerRadius = 4
-        showStatusButton.clipsToBounds = false
-        showStatusButton.layer.shadowColor = UIColor.black.cgColor
-        showStatusButton.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        showStatusButton.layer.shadowOpacity = 0.7
-        showStatusButton.layer.shadowRadius = 4.0
-        showStatusButton.layer.masksToBounds = false
+        showStatusButton.clipsToBounds          = false
+        
+        showStatusButton.layer.cornerRadius     = 4
+        showStatusButton.layer.shadowColor      = UIColor.black.cgColor
+        showStatusButton.layer.shadowOffset     = CGSize(width: 4.0, height: 4.0)
+        showStatusButton.layer.shadowOpacity    = 0.7
+        showStatusButton.layer.shadowRadius     = 4.0
+        showStatusButton.layer.masksToBounds    = false
         showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return showStatusButton
     }()
