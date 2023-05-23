@@ -11,13 +11,13 @@ class FeedViewController: UIViewController {
     
     // MARK: Subviews
     
-    private lazy var postButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Go to post", for: .normal)
-        button.backgroundColor = .systemGray
-        button.layer.cornerRadius = 9
-        return button
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 10.0
+        return stackView
     }()
     
     private lazy var firstViewInStack: UIView = {
@@ -32,24 +32,27 @@ class FeedViewController: UIViewController {
         return view
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.spacing = 10.0
-        return stackView
+    private lazy var buttonInStackView1: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("More details", for: .normal)
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
     }()
     
+    private lazy var buttonInStackView2: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Much more details", for: .normal)
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Feed"
         view.backgroundColor = .white
-        view.addSubview(postButton)
-        view.addSubview(stackView)
         setupViews()
+        setupConstraints()
     }
     
     // MARK: Actions
@@ -61,18 +64,12 @@ class FeedViewController: UIViewController {
     }
     
     private func setupViews() {
-        let button1 = UIButton(type: .system)
-        button1.setTitle("More detailed", for: .normal)
-        button1.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        stackView.addArrangedSubview(button1)
-        
-        let button2 = UIButton(type: .system)
-        button2.setTitle("More detailed", for: .normal)
-        button2.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        stackView.addArrangedSubview(button2)
-        
         view.addSubview(stackView)
-        
+        stackView.addArrangedSubview(buttonInStackView1)
+        stackView.addArrangedSubview(buttonInStackView2)
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
