@@ -9,6 +9,8 @@ import UIKit
 
 class PostViewController: UIViewController {
     
+    // MARK: Lifecycle
+    
     let post: Post
     
     override func viewDidLoad() {
@@ -28,12 +30,14 @@ class PostViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-@objc func goToInfo() {
+    
+    // MARK: Actions
+    
+    @objc func goToInfo() {
         let infoViewController = InfoViewController()
-    infoViewController.modalTransitionStyle = .coverVertical
-    infoViewController.modalPresentationStyle = .pageSheet
-    present(infoViewController, animated: true)
+        infoViewController.modalTransitionStyle = .coverVertical
+        infoViewController.modalPresentationStyle = .pageSheet
+        present(infoViewController, animated: true)
     }
     
 }
