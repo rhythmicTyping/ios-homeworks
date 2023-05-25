@@ -11,7 +11,7 @@ class ProfileHeaderView: UIView {
     
     // MARK: Subviews
     
-    let avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let image = UIImage(named: "Billy")
         let profilePhoto = UIImageView(image: image)
         profilePhoto.translatesAutoresizingMaskIntoConstraints = false
@@ -23,7 +23,7 @@ class ProfileHeaderView: UIView {
         return profilePhoto
     }()
     
-    let fullNameLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let profileName     = UILabel()
         profileName.translatesAutoresizingMaskIntoConstraints = false
         profileName.text    = "Billy Herrington"
@@ -31,7 +31,7 @@ class ProfileHeaderView: UIView {
         return profileName
     }()
     
-    var statusLabel: UILabel = {
+    private lazy var statusLabel: UILabel = {
         var profileStatus   = UILabel()
         profileStatus.translatesAutoresizingMaskIntoConstraints = false
         profileStatus.text  = "Waiting for the ♂ gym ♂..."
@@ -39,7 +39,7 @@ class ProfileHeaderView: UIView {
         return profileStatus
     }()
     
-    let statusTextField: UITextField = {
+    private lazy var statusTextField: UITextField = {
         let variableStatus = UITextField()
         variableStatus.translatesAutoresizingMaskIntoConstraints = false
         variableStatus.backgroundColor      = .white
@@ -59,7 +59,7 @@ class ProfileHeaderView: UIView {
         return variableStatus
     }()
     
-    let setStatusButton: UIButton = {
+    private lazy var setStatusButton: UIButton = {
         let showStatusButton = UIButton()
         showStatusButton.translatesAutoresizingMaskIntoConstraints = false
         showStatusButton.backgroundColor        = .systemBlue
