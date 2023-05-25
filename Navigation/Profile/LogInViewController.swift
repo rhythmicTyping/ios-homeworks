@@ -126,11 +126,6 @@ class LogInViewController: UIViewController {
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }
     
-//    @objc func willShowKeyboard(_ notification: NSNotification) {
-//        let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
-//        scrollView.contentInset.bottom += keyboardHeight ?? 0.0
-//    }
-    
     @objc private func willShowKeyboard(notification: NSNotification) {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
                 scrollView.contentInset.bottom = keyboardSize
