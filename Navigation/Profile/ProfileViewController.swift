@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     
     // MARK: Subviews
     
-    let profileHeaderView: ProfileHeaderView = {
+    private let profileHeaderView: ProfileHeaderView = {
         let profileHeaderView = ProfileHeaderView()
         profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
         return profileHeaderView
@@ -50,7 +50,8 @@ class ProfileViewController: UIViewController {
             
             newButton.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 0.0),
             newButton.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: 0.0),
-            newButton.bottomAnchor.constraint(equalTo: profileHeaderView.bottomAnchor, constant: 333)
+            newButton.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+            
         ])
     }
 }

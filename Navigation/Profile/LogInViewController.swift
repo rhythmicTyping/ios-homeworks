@@ -9,8 +9,35 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    // MARK: Properties
+    
+    private var isDiffValid = true
+    private lazy var insets = view.safeAreaInsets
+    
     // MARK: Subviews
     
+    private lazy var stackView: UIStackView = {
+        
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.cornerRadius = 10
+        stackView.clipsToBounds = true
+        stackView.addArrangedSubview(loginTextField)
+        stackView.addArrangedSubview(emptyView)
+        stackView.addArrangedSubview(passwordTextField)
+        
+        return stackView
+    }()
+    
+    private lazy var emptyView: UIView = {
+        let emptyView = UIView()
+        emptyView.translatesAutoresizingMaskIntoConstraints = false
+        return emptyView
+    }()
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -43,15 +70,11 @@ class LogInViewController: UIViewController {
         let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.backgroundColor          = .systemGray6
-        field.borderStyle              = UITextField.BorderStyle.roundedRect
+        field.layer.borderWidth = 0
         field.keyboardType             = UIKeyboardType.default
         field.returnKeyType            = UIReturnKeyType.done
         field.clearButtonMode          = UITextField.ViewMode.whileEditing
         field.textAlignment            = .center
-        field.layer.cornerRadius       = 10
-        field.layer.maskedCorners      = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        field.layer.borderWidth        = 0.5
-        field.layer.borderColor        = UIColor.lightGray.cgColor
         field.placeholder              = "Email or phone"
         field.font                     = UIFont.systemFont(ofSize: 16.0)
         field.textColor                = UIColor.black
@@ -66,15 +89,11 @@ class LogInViewController: UIViewController {
         field.translatesAutoresizingMaskIntoConstraints = false
         field.autocapitalizationType   = .none
         field.backgroundColor          = .systemGray6
-        field.borderStyle              = UITextField.BorderStyle.roundedRect
+        field.layer.borderWidth = 0
         field.keyboardType             = UIKeyboardType.default
         field.returnKeyType            = UIReturnKeyType.done
         field.clearButtonMode          = UITextField.ViewMode.whileEditing
         field.textAlignment            = .center
-        field.layer.cornerRadius       = 10
-        field.layer.maskedCorners      = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        field.layer.borderWidth        = 0.5
-        field.layer.borderColor        = UIColor.lightGray.cgColor
         field.placeholder              = "Password"
         field.font                     = UIFont.systemFont(ofSize: 16.0)
         field.textColor                = UIColor.black
@@ -109,13 +128,12 @@ class LogInViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-                setupKeyboardObservers()
+        setupKeyboardObservers()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-                removeKeyboardObservers()
+        removeKeyboardObservers()
     }
     
     
@@ -127,14 +145,21 @@ class LogInViewController: UIViewController {
     }
     
     @objc private func willShowKeyboard(notification: NSNotification) {
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-                scrollView.contentInset.bottom = keyboardSize
-                scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize, right: 0)
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let sumOfInsets = insets.top + insets.bottom
+            let frameButton = self.logInButton.frame.maxY
+            let frameKeyboard = keyboardSize.minY
+            let diff = frameButton - frameKeyboard
+            if diff > 0 && isDiffValid {
+                self.scrollView.frame.origin.y -= diff + sumOfInsets
+                isDiffValid = false
             }
         }
+    }
     
     @objc func willHideKeyboard(_ notification: NSNotification) {
-        scrollView.contentInset.bottom = 0.0
+        scrollView.frame.origin.y = insets.top
+        isDiffValid = true
     }
     
     
@@ -149,8 +174,7 @@ class LogInViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(logoUIImageView)
-        contentView.addSubview(loginTextField)
-        contentView.addSubview(passwordTextField)
+        contentView.addSubview(stackView)
         contentView.addSubview(logInButton)
     }
     
@@ -173,22 +197,21 @@ class LogInViewController: UIViewController {
             logoUIImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoUIImageView.heightAnchor.constraint(equalToConstant: 100.0),
             logoUIImageView.widthAnchor.constraint(equalToConstant: 100.0),
-            logoUIImageView.bottomAnchor.constraint(equalTo: loginTextField.topAnchor, constant: -120.0),
             
-            loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
-            loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
+            emptyView.heightAnchor.constraint(equalToConstant: 0.5),
             loginTextField.heightAnchor.constraint(equalToConstant: 50.0),
-            loginTextField.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor),
-            
-            passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
-            passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50.0),
-            passwordTextField.bottomAnchor.constraint(equalTo: logInButton.topAnchor, constant: -16.0),
             
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
+            stackView.topAnchor.constraint(equalTo: logoUIImageView.bottomAnchor, constant: 120.0),
+            stackView.heightAnchor.constraint(equalToConstant: 100.5),
+            
+            logInButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16.0),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
             logInButton.heightAnchor.constraint(equalToConstant: 50.0),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -110.0)
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
@@ -224,7 +247,6 @@ extension LogInViewController: UITextFieldDelegate {
         _ textField: UITextField
     ) -> Bool {
         textField.resignFirstResponder()
-        
         return true
     }
 }
