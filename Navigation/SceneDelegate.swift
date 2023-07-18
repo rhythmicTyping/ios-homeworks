@@ -13,33 +13,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
         
+        // Покраска статус бара в белый цвет (без этой настройки статус бар был серым) 
+        
+        let customNavBarAppearance = UINavigationBarAppearance()
+        customNavBarAppearance.configureWithOpaqueBackground()
+        customNavBarAppearance.backgroundColor = .white
+        
+        let appearance = UINavigationBar.appearance()
+        appearance.scrollEdgeAppearance = customNavBarAppearance
+        appearance.compactAppearance = customNavBarAppearance
+        appearance.standardAppearance = customNavBarAppearance
+        
         // Создаю экземпляры классов viewController для дальнейшего использования в коде
 
-        let profileViewController = ProfileViewController()
-        profileViewController.title = "Profile"
-        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 0)
+        let loginViewController = LogInViewController()
+        loginViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 0)
         
         let feedViewController = FeedViewController()
-        feedViewController.title = "Feed"
-        feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "newspaper.fill"), tag: 1)
-        
+        feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "house"), tag: 1)
+       
         //Создаю экземпляры навигационных контроллеров и передаю рутовое значения (первый экран) для того, чтобы использовать их в тапбаре.
         
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        let profileNavigationController = UINavigationController(rootViewController: loginViewController)
+        profileNavigationController.navigationBar.isHidden = true
+        
         let feedNavigationViewController = UINavigationController(rootViewController: feedViewController)
         
         // Создаю таб-бар контроллер
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [feedNavigationViewController, profileNavigationController]
-        UITabBar.appearance().backgroundColor = .systemGray
+        UITabBar.appearance().backgroundColor = .white
+        
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         
