@@ -9,6 +9,9 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    // MARK: Data
+    
+    fileprivate let data = Post.fillTableWithData()
     
     // MARK: Subviews
     
@@ -18,40 +21,93 @@ class ProfileViewController: UIViewController {
         return profileHeaderView
     }()
     
-    let newButton: UIButton = {
-        let newButton = UIButton()
-        newButton.translatesAutoresizingMaskIntoConstraints = false
-        newButton.backgroundColor = .systemBlue
-        newButton.setTitle("New button", for: .normal)
-        newButton.layer.cornerRadius = 4
-        return newButton
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView.init(
+            frame: .zero,
+            style: .grouped
+        )
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
     
-// MARK: Lifecycle
+    enum CellReuseId: String {
+        case base = "BaseTableViewCell_ReuseID"
+        case custom = "CustomTableViewCell_ReuseID"
+    }
+    
+    // MARK: Init
+    
+    // MARK: LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Profile"
-        view.backgroundColor = .lightGray
-        view.addSubview(profileHeaderView)
-        profileHeaderView.addSubview(newButton)
-        setupLayout()
+        
+        addSubviews()
+        setupConstraints()
+        tuneTableView()
     }
     
-// MARK: Actions
+    // MARK: Actions
     
-    private func setupLayout() {
+    private func addSubviews() {
+        view.addSubview(tableView)
+    }
+    
+    private func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
+        
         NSLayoutConstraint.activate([
-            profileHeaderView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 0.0),
-            profileHeaderView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: 0.0),
-            profileHeaderView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 0.0),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-            
-            newButton.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 0.0),
-            newButton.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: 0.0),
-            newButton.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
-            
+            tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
     }
+    
+    private func tuneTableView() {
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+        
+        tableView.tableFooterView = UIView()
+        
+        tableView.register(
+            PostTableViewCell.self,
+            forCellReuseIdentifier: CellReuseId.base.rawValue
+        )
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+    }
 }
+
+// MARK: Extenstions
+
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: CellReuseId.base.rawValue,
+            for: indexPath
+        ) as? PostTableViewCell else {
+            fatalError("Could not dequeueReusableCell")
+        }
+        
+        cell.update(data[indexPath.row])
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return profileHeaderView
+    }
+}
+
+

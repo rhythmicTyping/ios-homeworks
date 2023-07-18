@@ -58,7 +58,7 @@ class FeedViewController: UIViewController {
     // MARK: Actions
     
     @objc private func buttonPressed() {
-        let post = Post(title: "This post title")
+        let post = Post(author: "", description: "", image: "", likes: 0, views: 0)
         let postViewController = PostViewController(post: post)
         self.navigationController?.pushViewController(postViewController, animated: true)
     }

@@ -36,6 +36,7 @@ class LogInViewController: UIViewController {
     private lazy var emptyView: UIView = {
         let emptyView = UIView()
         emptyView.translatesAutoresizingMaskIntoConstraints = false
+        emptyView.backgroundColor = .lightGray
         return emptyView
     }()
     private lazy var scrollView: UIScrollView = {

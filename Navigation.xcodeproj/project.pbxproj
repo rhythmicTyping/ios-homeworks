@@ -21,6 +21,7 @@
 		2A5F18D129BE3CC00042449A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5F18D029BE3CC00042449A /* PostViewController.swift */; };
 		2A5F18D329BE43600042449A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5F18D229BE43600042449A /* Post.swift */; };
 		2A5F18D529BFB8960042449A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5F18D429BFB8950042449A /* InfoViewController.swift */; };
+		2A5F6A682A65B37900E835CF /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5F6A672A65B37900E835CF /* PostTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		2A5F18D029BE3CC00042449A /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		2A5F18D229BE43600042449A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		2A5F18D429BFB8950042449A /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		2A5F6A672A65B37900E835CF /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				2A5F18D229BE43600042449A /* Post.swift */,
+				2A5F6A672A65B37900E835CF /* PostTableViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				2A5F18D329BE43600042449A /* Post.swift in Sources */,
 				2A5F18D529BFB8960042449A /* InfoViewController.swift in Sources */,
 				2A4751C22A1BC7700063579F /* ButtonWithChangingAlpha.swift in Sources */,
+				2A5F6A682A65B37900E835CF /* PostTableViewCell.swift in Sources */,
 				2A4FE24329F56E4200542C3D /* ProfileHeaderView.swift in Sources */,
 				2A5F18BB29BD11960042449A /* SceneDelegate.swift in Sources */,
 			);
